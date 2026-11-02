@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public static class ArraySelector
 {
     public static void Run()
@@ -8,9 +11,26 @@ public static class ArraySelector
         var intResult = ListSelector(l1, l2, select);
         Console.WriteLine("<int[]>{" + string.Join(", ", intResult) + "}"); // <int[]>{1, 2, 3, 2, 4, 4, 6, 8, 10, 5}
     }
-
-    private static int[] ListSelector(int[] list1, int[] list2, int[] select)
+        public static int[] ListSelector(int[] array1, int[] array2, int[] selector)
     {
-        return [];
+        List<int> result = new List<int>();
+
+        int array1Index = 0;
+        int array2Index = 0;
+        foreach (int select in selector)
+        {
+            if (select == 1)
+            {
+                result.Add(array1[array1Index]);
+                array1Index++;
+            }
+            else if (select == 2)
+            {
+                result.Add(array2[array2Index]);
+                array2Index++;
+            }
+        }
+                   return result.ToArray();
+
     }
-}
+}       
