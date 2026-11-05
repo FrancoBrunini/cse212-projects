@@ -14,19 +14,43 @@ public class CustomerService {
         // Scenario: 
         // Expected Result: 
         Console.WriteLine("Test 1");
-
-        // Defect(s) Found: 
+//var cs = new CustomerService(-10);
+//Console.WriteLine(cs);
+        // Defect(s) Found:  the constructor worked well
 
         Console.WriteLine("=================");
-
-        // Test 2
-        // Scenario: 
-        // Expected Result: 
         Console.WriteLine("Test 2");
 
-        // Defect(s) Found: 
+      //  var cs2 = new CustomerService(2);
+        // simulate the lines
+       //  cs2.AddNewCustomer(); // Customer 1
+       // cs2.AddNewCustomer(); // Customer 2
+       // cs2.AddNewCustomer(); // Customer 3 (should not be added)
+     //   Console.WriteLine(cs2);
+        //Defect(s) Found: in if (_queue.Count > _maxSize) it was missing the >=, so It can stop there
+
+
 
         Console.WriteLine("=================");
+        Console.WriteLine("Test 3");
+        // Scenario: it should display the first customer in the queue and then remove it from the queue
+        // Expected Result: it should display the information for the first customer in the queue and then remove it from the queue
+//var cs3 = new CustomerService(5);
+//cs3.AddNewCustomer();
+///cs3.AddNewCustomer();
+//cs3.ServeCustomer();
+// Scenario: we are gonna create a new customer service queue and add 2 customers to it, then we are gonna serve the first customer in the queue and then display the information for the first customer in the queue and then remove it from the queue
+// Expected Result: it should appear the information before elmitating
+// Defect(s) Found:  it eliminates the first customer in the queue but it doesn't display the information for the first customer in the queue before eliminating it, so I added a line to display the information for the first customer in the queue before eliminating it
+
+        Console.WriteLine("Test 4");
+        var cs4 = new CustomerService(5);
+        cs4.ServeCustomer();
+        // Scenario: we are gonna create a new customer service queue without customers
+        // expected Result: it should appear an error message
+        // Defect(s) Found:  it doesn't display an error message when the queue is empty, so I added a line to display an error message when the queue is empty
+
+
 
         // Add more Test Cases As Needed Below
     }
@@ -67,7 +91,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +112,14 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
+        if (_queue.Count <= 0) {
+            Console.WriteLine("No Customers in Queue.");
+            return;
+        }
         var customer = _queue[0];
         Console.WriteLine(customer);
+         _queue.RemoveAt(0);
+
     }
 
     /// <summary>
